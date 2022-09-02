@@ -3,7 +3,7 @@ function computerPlay(){
     const choiceList = ["Rock", "Paper", "Scissors"]
     return choiceList[Math.floor(Math.random() * choiceList.length)]
 }
-function playRockPaperScissors(playerSelection){
+function playRockPaperScissors(playerSelection, playerWins, computerWins){
     // Checking if playerMade a selection
     const playerSelectionLowercase = playerSelection ? playerSelection.toLowerCase() : "Not correct value";
     // Checking if selection is rock, paper or scissors
@@ -18,19 +18,34 @@ function playRockPaperScissors(playerSelection){
     // Checking winning combinations
     switch(playerSelectionLowercase){
         case "scissors":
+            computerSelection === "Rock" ? computerWins() : playerWins();
             return `Your choice - ${playerSelection}, computers choice - ${computerSelection}. ${computerSelection === "Rock" ? "You lost❌" : "You win✔"}`;
             break;
         case "paper":
+            computerSelection === "Scissors" ? computerWins() : playerWins();
             return `Your choice - ${playerSelection}, computers choice - ${computerSelection}. ${computerSelection === "Scissors" ? "You lost❌" : "You win✔"}`;
             break;
         case "rock":
+            computerSelection === "Paper" ? computerWins() : playerWins();
             return `Your choice - ${playerSelection}, computers choice - ${computerSelection}. ${computerSelection === "Paper" ? "You lost❌" : "You win✔"}`;
             break;
     }
 }
 // Invoking game for users
-for(let i = 0; i < 5; i++)
-{
-    const playerSelection = prompt("Please right your choice (Rock, Paper, Scissors)", "Scissors")
-    console.log(playRockPaperScissors(playerSelection))
+function game(){
+    let playerScore = 0;
+    let computerScore = 0;
+    function playerWins(){
+        playerScore +=1;
+    }
+    function computerWins(){
+        computerScore +=1;
+    }
+    for(let i = 0; i < 5; i++)
+    {
+        const playerSelection = prompt("Please right your choice (Rock, Paper, Scissors)", "Scissors")
+        console.log(playRockPaperScissors(playerSelection, playerWins, computerWins))
+    }
+    return computerScore === playerScore ? `Your score ${playerScore} - computers score ${computerScore}. Tie🏳` :
+    `Your score ${playerScore} - computers score ${computerScore}.  ${computerScore > playerScore ? "You lost❌" : "You win✔"}`
 }

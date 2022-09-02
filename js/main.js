@@ -1,15 +1,7 @@
 function computerPlay(){
     //  Creating random number from 0 to 1 and multiply it by 100, then clearing decimals
-    const choice = Math.floor(Math.random() * 100)
-    if(choice <= 33){
-        return "Scissors"
-    }
-    if(choice > 33 && choice <= 66){
-        return "Paper"
-    }
-    else{
-        return "Rock"
-    }
+    const choiceList = ["Rock", "Paper", "Scissors"]
+    return choiceList[Math.floor(Math.random() * choiceList.length)]
 }
 function playRockPaperScissors(playerSelection){
     // Checking if playerMade a selection
